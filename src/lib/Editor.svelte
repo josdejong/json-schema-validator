@@ -64,8 +64,6 @@
       }
     : { code: 'ok', description: 'The JSON document is valid according to the JSON Schema' }
 
-  $: console.log('status', { status })
-
   function tryCreateValidator(schemaContent: Content): Validator | undefined {
     const result = createValidator(schemaContent)
 
@@ -125,7 +123,6 @@
     previousContent: Content,
     { contentErrors }: OnChangeStatus
   ) {
-    console.log('onChange')
     hasJsonError = isContentParseError(contentErrors)
     hasValidationErrors = isContentValidationErrors(contentErrors)
   }
