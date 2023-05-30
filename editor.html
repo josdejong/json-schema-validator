@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JSON Schema Validator</title>
+  </head>
+  <body>
+    <!-- copy the following three blocks (style, div, script) into a WordPress Divi "code" block -->
+    <!-- then, change the JS import line to https://josdejong.github.io/json-schema-validator/index.js -->
+
+    <style>
+      #json-schema-validator {
+        display: flex;
+        width: 100%;
+        max-width: 1000px;
+        height: 400px;
+      }
+    </style>
+
+    <div id="json-schema-validator">
+      <span class="loading">Loading editor...</span>
+    </div>
+
+    <script type="module">
+      import { Editor } from 'https://josdejong.github.io/json-schema-validator/index.js'
+
+      const jsonSchemaContent = {
+        json: {
+          $id: 'https://example.com/person.schema.json',
+          $schema: 'https://json-schema.org/draft/2020-12/schema',
+          title: 'Friends',
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+                description: "The friend's name."
+              },
+              age: {
+                description: 'Age in years which must be equal to or greater than zero.',
+                type: 'integer',
+                minimum: 0
+              },
+              city: {
+                type: 'string',
+                description: 'The city where the friend lives.'
+              }
+            },
+            required: ['name', 'age', 'city']
+          }
+        }
+      }
+
+      const jsonContent = {
+        json: [
+          { name: 'Chris', age: 23, city: 'New York' },
+          { name: 'Emily', age: 19, city: 'Atlanta' },
+          { name: 'Joe', age: 32, city: 'New York' },
+          { name: 'Kevin', age: 19, city: 'Atlanta' },
+          { name: 'Michelle', age: 27, city: 'Los Angeles' },
+          { name: 'Robert', age: 45, city: 'Manhattan' },
+          { name: 'Sarah', age: 31, city: 'New York' }
+        ]
+      }
+
+      const target = document.getElementById('json-schema-validator')
+      const editor = new Editor({ target, props: { jsonSchemaContent, jsonContent } })
+      const loading = target.querySelector('span.loading')
+      target.removeChild(loading)
+    </script>
+  </body>
+</html>
