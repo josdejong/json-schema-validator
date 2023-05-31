@@ -22,25 +22,26 @@
             type: 'integer',
             minimum: 0
           },
-          city: {
+          email: {
             type: 'string',
-            description: 'The city where the friend lives.'
+            format: 'email',
+            description: 'Optional email address of the friend.'
           }
         },
-        required: ['name', 'age', 'city']
+        required: ['name', 'age']
       }
     }
   }
 
   let jsonContent = {
     json: [
-      { name: 'Chris', age: 23, city: 'New York' },
-      { name: 'Emily', age: 19, city: 'Atlanta' },
-      { name: 'Joe', age: 32, city: 'New York' },
-      { name: 'Kevin', age: 19, city: 'Atlanta' },
-      { name: 'Michelle', age: 27, city: 'Los Angeles' },
-      { name: 'Robert', age: 45, city: 'Manhattan' },
-      { name: 'Sarah', age: 31, city: 'New York' }
+      { name: 'Chris', age: 23, email: 'chris@example.com' },
+      { name: 'Emily', age: 19, email: 'emily@example.com' },
+      { name: 'Joe', age: 32 },
+      { name: 'Kevin', age: 19 },
+      { name: 'Michelle', age: 27, email: 'michelle@example.com' },
+      { name: 'Robert', age: 45 },
+      { name: 'Sarah', age: 31 }
     ]
   }
 

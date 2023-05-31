@@ -1,22 +1,25 @@
 <script lang="ts">
   import Ajv2019 from 'ajv/dist/2019'
   import Ajv2020 from 'ajv/dist/2020'
+  import addFormats from 'ajv-formats'
   import Icon from 'svelte-awesome'
 
   import { faCheck, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
   import { disablePageScroll, enablePageScroll } from './pageScroll.js'
   import {
-    isContentParseError,
     type Content,
-    type OnChangeStatus,
-    type Validator,
+    createAjvValidator,
+    isContentParseError,
     isContentValidationErrors,
+    isTextContent,
+    JSONEditor,
     type JSONValue,
-    type JSONSchema,
+    Mode,
+    type OnChangeStatus,
     type ValidationError,
-    ValidationSeverity
+    ValidationSeverity,
+    type Validator
   } from 'svelte-jsoneditor'
-  import { JSONEditor, createAjvValidator, Mode, isTextContent } from 'svelte-jsoneditor'
   import { draft6MetaSchema } from './json-schema-draft-06.js'
 
   export let jsonSchemaContent: Content = { text: '' }
@@ -94,6 +97,7 @@
           })
 
           ajv.addMetaSchema(draft6MetaSchema)
+          addFormats(ajv)
 
           return ajv
         }
